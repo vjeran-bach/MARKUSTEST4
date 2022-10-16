@@ -31,6 +31,7 @@ public class PlayerTestMovement : MonoBehaviour
 
     // SERIALIZED FIELDS
     [SerializeField] float wallJumpStrength;
+    [SerializeField] float wallJumptrengthY;
     [SerializeField] float speed;
     [SerializeField] private LayerMask doNotCollide;
     [SerializeField] float jumpStrength;
@@ -195,6 +196,7 @@ public class PlayerTestMovement : MonoBehaviour
                 triggerWallJumpLeft = true;
                 triggerWallJumpRight = false;
                 otherForces = new Vector2(otherSpeed, 0);
+                body.velocity = new Vector2(body.velocity.x, 0); // TEST
                 body.AddForce(new Vector2(0, wallJumpStrength), ForceMode2D.Impulse);
                 counterWallJump = 0;
             }
@@ -203,6 +205,7 @@ public class PlayerTestMovement : MonoBehaviour
             {
                 triggerWallJumpRight = true;
                 triggerWallJumpLeft = false;
+                body.velocity = new Vector2(body.velocity.x, 0); // TEST
                 otherForces = new Vector2(-otherSpeed, 0);
                 body.AddForce(new Vector2(-otherSpeed, wallJumpStrength), ForceMode2D.Impulse);
                 counterWallJump = 0;

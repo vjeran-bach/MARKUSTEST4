@@ -8,11 +8,13 @@ public class Shooting : MonoBehaviour
     public GameObject ShotBullet;
     public GameObject ShotBulletDmg;
     public GameObject ShotBulletSniper;
+    public GameObject StickyBomb;
 
     float time;
     // Start is called before the first frame update
     void Start()
     {
+
     }
 
     // Update is called once per frame
@@ -22,6 +24,11 @@ public class Shooting : MonoBehaviour
         {
             //GameObject newBullet = Instantiate(ShotBullet, new Vector2(rb.position.x, rb.position.y), transform.rotation); SHOOT BRICK
             GameObject newBullet = Instantiate(ShotBulletSniper, new Vector2(rb.position.x, rb.position.y), transform.rotation);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            GameObject newBullet = Instantiate(StickyBomb, new Vector2(rb.position.x, rb.position.y), transform.rotation);
         }
 
         /*if (Input.GetMouseButton(1))
