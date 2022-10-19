@@ -1,54 +1,77 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
-public class Block
+public class Room : MonoBehaviour
 {
-    public int iBlockType;
-    public GameObject GoBlockObject;
-    public int iXBlockPosition;
-    public int iYBlockPosition;
+    [Header("Variables")]
+    // chance of the room being accepted if picked at random (100 = if picked at random, gets chosen)
+    [Range(0.0f, 100.0f)] public float fRoomSpawnChance;
+    // type of room
+    public int iTypeOfRoom;
+    
+    [Header("Doors")]
+    // doors in the room
+    public List<GameObject> GoLeftDoors = new List<GameObject>();
+    public List<GameObject> GoRightDoors = new List<GameObject>();
+    public List<GameObject> GoTopDoors = new List<GameObject>();
+    public List<GameObject> GoBottomDoors = new List<GameObject>();
 
-    public Block(int iBlockType, GameObject GoBlockObject, int iXBlockPosition, int iYBlockPosition)
+    public virtual void FindDoors()
     {
-        this.iBlockType = iBlockType;
-        this.GoBlockObject = GoBlockObject;
-        this.iXBlockPosition = iXBlockPosition;
-        this.iYBlockPosition = iYBlockPosition;
-    }
-     
-}
-
-public class Room
-{
-    public GameObject GoRoomBlock;
-
-    public Block[,] BRoomBlocks;
-    public int iXRoomLength;
-    public int iYRoomHeight;
-    public int iXRoomPosition;
-    public int iYRoomPosition;
-
-    public Room(int iXRoomPosition, int iYRoomPosition, int iXRoomLength, int iYRoomHeight, GameObject GoRoomBlock)
-    {
-        this.iYRoomPosition = iYRoomPosition;
-        this.iXRoomPosition = iXRoomPosition;
-        this.iXRoomLength = iXRoomLength;
-        this.iYRoomHeight = iYRoomHeight;
-        this.GoRoomBlock = GoRoomBlock;
-
-        for (int iX = 0; iX < iXRoomLength; iX++)
+        // find all children of these children and add them to the list
+        Transform TRoomTransform = this.transform;
+        Debug.Log("[ROOM:" + this.name + "] Children count: " + TRoomTransform.childCount);
+        for (int i = 0; i < TRoomTransform.childCount; i++)
         {
-            for (int iY = 0; iY < iYRoomHeight; iY++)
+            if (TRoomTransform.GetChild(i).gameObject.name == "Left Doors" && TRoomTransform.GetChild(i).childCount != 0)
             {
-                //Instantiate(GoRoomBlock, new Vector3(iX + iXRoomPosition, iY + iYRoomPosition, 0), Quaternion.identity);
-                BRoomBlocks[iX + iXRoomPosition, iY + iYRoomPosition] = new Block(0, GoRoomBlock, iX + iXRoomPosition, iY + iYRoomPosition);
+                Debug.Log("[ROOM:" + this.name + "] Left doors count: " + TRoomTransform.GetChild(i).childCount);
+                for (int j = 0; j < TRoomTransform.GetChild(i).childCount; j++)
+                {
+                    Debug.Log("[ROOM:" + this.name + "] generated left door: " + TRoomTransform.GetChild(i).GetChild(j).gameObject.name);
+                    GoLeftDoors.Add(TRoomTransform.GetChild(i).GetChild(j).gameObject);
+                }
+            }
+            if (TRoomTransform.GetChild(i).gameObject.name == "Right Doors" && TRoomTransform.GetChild(i).childCount != 0)
+            {
+                Debug.Log("[ROOM:" + this.name + "] Right doors count: " + TRoomTransform.GetChild(i).childCount);
+                for (int j = 0; j < TRoomTransform.GetChild(i).childCount; j++)
+                {
+                    Debug.Log("[ROOM:" + this.name + "] generated right door: " + TRoomTransform.GetChild(i).GetChild(j).gameObject.name);
+                    GoRightDoors.Add(TRoomTransform.GetChild(i).GetChild(j).gameObject);
+                }
+            }
+            if (TRoomTransform.GetChild(i).gameObject.name == "Top Doors" && TRoomTransform.GetChild(i).childCount != 0)
+            {
+                Debug.Log("[ROOM:" + this.name + "] Top doors count: " + TRoomTransform.GetChild(i).childCount);
+                for (int j = 0; j < TRoomTransform.GetChild(i).childCount; j++)
+                {
+                    Debug.Log("[ROOM:" + this.name + "] generated top door: " + TRoomTransform.GetChild(i).GetChild(j).gameObject.name);
+                    GoTopDoors.Add(TRoomTransform.GetChild(i).GetChild(j).gameObject);
+                }
+            }
+            if (TRoomTransform.GetChild(i).gameObject.name == "Bottom Doors" && TRoomTransform.GetChild(i).childCount != 0)
+            {
+                Debug.Log("[ROOM:" + this.name + "] Bottom doors count: " + TRoomTransform.GetChild(i).childCount);
+                for (int j = 0; j < TRoomTransform.GetChild(i).childCount; j++)
+                {
+                    Debug.Log("[ROOM:" + this.name + "] generated bottom door: " + TRoomTransform.GetChild(i).GetChild(j).gameObject.name);
+                    GoBottomDoors.Add(TRoomTransform.GetChild(i).GetChild(j).gameObject);
+                }
             }
         }
-
     }
+
+    public virtual void RemoveDoors()
+    {
+        GoLeftDoors.Clear();
+        GoRightDoors.Clear();
+        GoTopDoors.Clear();
+        GoBottomDoors.Clear();
+    }
+
+
 }
 
-
-// Implement a use for BlockType
-// Maybe create another class for Tile in general
