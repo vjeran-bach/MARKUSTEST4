@@ -9,12 +9,23 @@ public class BulletUp : MonoBehaviour
     [SerializeField] float speed;
     bool triggerCollision;
 
+    GameObject player;
+
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+
         body = gameObject.GetComponent<Rigidbody2D>();
 
-        body.velocity = new Vector2(0, speed);
+        if (player.transform.position.x > gameObject.transform.position.x)
+        {
+            body.velocity = new Vector2(speed, 0);
+        }
+        else
+        {
+            body.velocity = new Vector2(-speed, 0);
+        }
     }
 
     // Update is called once per frame

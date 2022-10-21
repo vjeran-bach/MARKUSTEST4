@@ -11,14 +11,27 @@ public class PatrolBotMovement : MonoBehaviour
     BoxCollider2D collider_player;
     float distToGround;
 
+    bool patrol;
+
     [SerializeField] private LayerMask doNotCollide;
 
     [SerializeField] GameObject BulletUp;
+
+    [SerializeField] GameObject player;
+
+    float distance;
+    [SerializeField] float range;
+
+    float shootingRange;
+    float xDistance;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        patrol = true;
+        range = 13;
+        shootingRange = 27;
         body = GetComponent<Rigidbody2D>();
         collider_player = GetComponent<BoxCollider2D>();
         distToGround = collider_player.bounds.extents.y;
@@ -33,18 +46,56 @@ public class PatrolBotMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (IsGroundedRight(doNotCollide) == true || IsGroundedRightDown(doNotCollide) == false)
+        distance = Vector2.Distance(gameObject.transform.position, player.transform.position);
+
+        xDistance = gameObject.transform.position.x - player.transform.position.x;
+        
+        if (distance > range)
         {
-            dir = -1;
+            patrol = false;
+        }
+        else
+        {
+            patrol = true;
         }
 
-        if (IsGroundedLeft(doNotCollide) == true || IsGroundedLeftDown(doNotCollide) == false)
+        if (patrol == false)
         {
-            dir = 1;
-        }
 
-        body.velocity = new Vector2(dir * 10, body.velocity.y);
+            if (IsGroundedRight(doNotCollide) == true || IsGroundedRightDown(doNotCollide) == false)
+            {
+                dir = -1;
+            }
+
+            if (IsGroundedLeft(doNotCollide) == true || IsGroundedLeftDown(doNotCollide) == false)
+            {
+                dir = 1;
+            }
+
+            body.velocity = new Vector2(dir * 10, body.velocity.y);
+        }
+        else if (patrol == true)
+        {
+            if (player.transform.position.x > gameObject.transform.position.x && xDistance > 1)
+            {
+                dir = 1;
+            }
+            else if (player.transform.position.x < gameObject.transform.position.x && xDistance > 1)
+            {
+                dir = -1;
+            }
+
+            if (IsGroundedRight(doNotCollide) == false && IsGroundedRightDown(doNotCollide) == true && (IsGroundedLeft(doNotCollide) == false && IsGroundedLeftDown(doNotCollide) == true))
+            {
+                body.velocity = new Vector2(dir * 10, body.velocity.y);
+            }
+            else
+            {
+                body.velocity = new Vector2(0, body.velocity.y);
+            }
+        }
     }
+
 
     bool IsGroundedRight(LayerMask mask)
     {
@@ -75,9 +126,12 @@ public class PatrolBotMovement : MonoBehaviour
 
             if (count > waitTime)
             {
-                Instantiate(BulletUp, new Vector2(transform.position.x, transform.position.y + 1), BulletUp.transform.rotation);
-                StartCoroutine(DoTimer(1, 1));
-                yield break;
+                if (distance < shootingRange)
+                {
+                    Instantiate(BulletUp, new Vector2(transform.position.x, transform.position.y + 1), BulletUp.transform.rotation);
+                    StartCoroutine(DoTimer(1, 1));
+                    yield break;
+                }
             }
         }
     }

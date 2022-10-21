@@ -32,8 +32,4 @@ public class MachineGunBullet : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Object.Destroy(gameObject);
-    }
 }

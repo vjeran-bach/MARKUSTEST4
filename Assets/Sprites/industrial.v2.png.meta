@@ -8688,9 +8688,9 @@ TextureImporter:
       industrial.v2_318: 1826054927
       industrial.v2_13: -1178843899
       industrial.v2_3: -1930671179
-      industrial.v2_177: -1123136142
-      industrial.v2_149: -698156781
       industrial.v2_171: 21824648
+      industrial.v2_149: -698156781
+      industrial.v2_177: -1123136142
       industrial.v2_96: -1769257234
       industrial.v2_190: -756929666
       industrial.v2_244: 1310941137
@@ -8800,13 +8800,13 @@ TextureImporter:
       industrial.v2_4: -2109287125
       industrial.v2_391: 1161369075
       industrial.v2_37: -48194876
-      industrial.v2_160: -1715942765
       industrial.v2_278: 155232186
+      industrial.v2_315: 1509257149
       industrial.v2_12: 650653734
       industrial.v2_158: -2068821110
       industrial.v2_271: 1828063587
-      industrial.v2_315: 1509257149
       industrial.v2_6: -1985774685
+      industrial.v2_160: -1715942765
       industrial.v2_193: -2053824007
       industrial.v2_243: 1497395757
       industrial.v2_294: -1868444481
@@ -8905,8 +8905,8 @@ TextureImporter:
       industrial.v2_71: 934358481
       industrial.v2_213: -1052525179
       industrial.v2_242: -1897750098
-      industrial.v2_188: -910202315
       industrial.v2_255: -1830614591
+      industrial.v2_188: -910202315
       industrial.v2_355: 1034245007
       industrial.v2_148: 1728256530
       industrial.v2_359: 1737631285
@@ -8934,10 +8934,10 @@ TextureImporter:
       industrial.v2_283: -1559085814
       industrial.v2_246: 1292871695
       industrial.v2_143: 1194557058
-      industrial.v2_191: -2009092305
       industrial.v2_259: 41519311
       industrial.v2_249: -52101003
       industrial.v2_385: -93416054
+      industrial.v2_191: -2009092305
       industrial.v2_376: -68190620
       industrial.v2_187: 58655304
       industrial.v2_88: -596501171
@@ -8949,8 +8949,8 @@ TextureImporter:
       industrial.v2_390: 1124934110
       industrial.v2_231: 1244615621
       industrial.v2_174: 1462474829
-      industrial.v2_267: -836495254
       industrial.v2_386: 228469248
+      industrial.v2_267: -836495254
       industrial.v2_76: -911648418
       industrial.v2_351: 728876984
       industrial.v2_272: 16235656
@@ -8986,8 +8986,8 @@ TextureImporter:
       industrial.v2_214: 381220956
       industrial.v2_43: -732823238
       industrial.v2_264: 1784096017
-      industrial.v2_256: 854514935
       industrial.v2_302: 1329933604
+      industrial.v2_256: 854514935
       industrial.v2_44: -727723375
       industrial.v2_279: 302744951
       industrial.v2_383: 273768047
